@@ -1,0 +1,123 @@
+<div class="home-container">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <h1>BookNow</h1>
+      </div>
+      <nav class="nav">
+        <a href="#" class="nav-link">Movies</a>
+        <a href="#" class="nav-link">Events</a>
+        <a href="#" class="nav-link">Sports</a>
+        <a href="#" class="nav-link">Concerts</a>
+      </nav>
+      <div class="user-actions">
+        <button class="btn-secondary" (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Book Your Tickets Online</h2>
+      <p>Discover amazing events, movies, and shows. Book your tickets instantly and enjoy the experience!</p>
+      <div class="search-bar">
+        <input 
+          type="text" 
+          placeholder="Search for events, movies, or shows..." 
+          class="search-input"
+          [value]="searchQuery()"
+          (input)="onSearchInput($event)"
+        >
+        <button class="search-btn" (click)="onSearch()">Search</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Events -->
+  <section class="featured-events">
+    <div class="container">
+      <h3>Featured Events</h3>
+      <div class="events-grid">
+        <div class="event-card" *ngFor="let event of filteredEvents()">
+          <div class="event-image">
+            <img [src]="event.image" [alt]="event.title">
+            <div class="event-badge">{{ event.category }}</div>
+          </div>
+          <div class="event-info">
+            <h4>{{ event.title }}</h4>
+            <p class="event-date">{{ event.date }}</p>
+            <p class="event-venue">{{ event.venue }}</p>
+            <div class="event-price">
+              <span class="price">From ${{ event.price }}</span>
+              <button class="book-btn" (click)="bookEvent(event)">Book Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="filteredEvents().length === 0" class="no-results">
+        <h3>No events found</h3>
+        <p>Try adjusting your search terms</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="categories">
+    <div class="container">
+      <h3>Browse by Category</h3>
+      <div class="categories-grid">
+        <div class="category-card" *ngFor="let category of categories()">
+          <div class="category-icon">
+            <i [class]="category.icon"></i>
+          </div>
+          <h4>{{ category.name }}</h4>
+          <p>{{ category.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>BookNow</h4>
+          <p>Your one-stop destination for booking tickets online.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Categories</h4>
+          <ul>
+            <li><a href="#">Movies</a></li>
+            <li><a href="#">Concerts</a></li>
+            <li><a href="#">Sports</a></li>
+            <li><a href="#">Theater</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Connect</h4>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 BookNow. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</div>

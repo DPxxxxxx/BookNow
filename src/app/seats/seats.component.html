@@ -1,0 +1,115 @@
+<div class="seats-container">
+  <!-- Header -->
+  <header class="seats-header">
+    <div class="header-content">
+      <button class="back-btn" (click)="goBack()">
+        <i class="fas fa-arrow-left"></i> Back
+      </button>
+      <h1>Select Your Seats</h1>
+    </div>
+  </header>
+
+  <div class="seats-content">
+    <div class="container">
+      <!-- Event Info -->
+      <div class="event-info-card">
+        <h2>{{ eventDetails().title }}</h2>
+        <div class="event-meta">
+          <span><i class="fas fa-calendar"></i> {{ eventDetails().date }}</span>
+          <span><i class="fas fa-map-marker-alt"></i> {{ eventDetails().venue }}</span>
+          <span><i class="fas fa-ticket-alt"></i> {{ requiredTickets() }} ticket(s) required</span>
+        </div>
+      </div>
+
+      <!-- Seat Selection Status -->
+      <div class="selection-status">
+        <div class="status-item">
+          <span class="status-label">Selected:</span>
+          <span class="status-value">{{ selectedSeats().length }} / {{ requiredTickets() }}</span>
+        </div>
+        <div class="status-item">
+          <span class="status-label">Total Price:</span>
+          <span class="status-value price">${{ totalPrice() }}</span>
+        </div>
+      </div>
+
+      <!-- Seat Map -->
+      <div class="seat-map-container">
+        <div class="screen">SCREEN</div>
+        
+        <div class="seat-map">
+          <div class="seat-row" *ngFor="let row of rows">
+            <div class="row-label">{{ row }}</div>
+            <div class="seats-in-row">
+              <div 
+                *ngFor="let seat of getSeatsForRow(row)"
+                [class]="getSeatClass(seat)"
+                (click)="toggleSeat(seat)"
+              >
+                {{ seat.number }}
+              </div>
+            </div>
+            <div class="row-label">{{ row }}</div>
+          </div>
+        </div>
+
+        <!-- Seat Legend -->
+        <div class="seat-legend">
+          <div class="legend-item">
+            <div class="legend-seat available"></div>
+            <span>Available</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-seat selected"></div>
+            <span>Selected</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-seat occupied"></div>
+            <span>Occupied</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pricing Info -->
+      <div class="pricing-info">
+        <h3>Pricing</h3>
+        <div class="price-tiers">
+          <div class="price-tier">
+            <span class="tier-name">Premium (Rows A-C)</span>
+            <span class="tier-price">$80</span>
+          </div>
+          <div class="price-tier">
+            <span class="tier-name">Standard (Rows D-F)</span>
+            <span class="tier-price">$60</span>
+          </div>
+          <div class="price-tier">
+            <span class="tier-name">Economy (Rows G-J)</span>
+            <span class="tier-price">$40</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Selected Seats Summary -->
+      <div class="selected-seats-summary" *ngIf="selectedSeats().length > 0">
+        <h3>Selected Seats</h3>
+        <div class="selected-seats-list">
+          <div class="selected-seat-item" *ngFor="let seat of selectedSeats()">
+            <span class="seat-info">{{ seat.row }}{{ seat.number }}</span>
+            <span class="seat-price">${{ seat.price }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button 
+          class="confirm-btn" 
+          (click)="onConfirmBooking()"
+          [disabled]="!canProceed()"
+        >
+          Confirm Booking - ${{ totalPrice() }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

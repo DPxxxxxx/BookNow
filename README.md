@@ -1,59 +1,103 @@
-# BookNow
+# BookNow - Online Ticket Booking System
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.1.
+A modern Angular application for booking tickets online for movies, concerts, sports events, and more.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- **Login Page**: Secure user authentication with form validation
+- **Home Page**: Beautiful landing page with featured events and categories
+- **Responsive Design**: Works seamlessly on desktop and mobile devices
+- **Modern UI**: Clean, professional interface with smooth animations
 
+## Getting Started
+
+### Prerequisites
+
+- Node.js (version 18 or higher)
+- npm (version 9 or higher)
+
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+### Development
+
+Run the development server:
 ```bash
-ng serve
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+### Build
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+Build the project for production:
 ```bash
-ng generate component component-name
+npm run build
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+The build artifacts will be stored in the `dist/` directory.
 
-```bash
-ng generate --help
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── login/           # Login component
+│   │   └── login.component.ts
+│   ├── home/            # Home page component
+│   │   ├── home.component.ts
+│   │   ├── home.component.html
+│   │   └── home.component.css
+│   ├── app.routes.ts    # Application routing
+│   └── app.ts          # Main app component
 ```
 
-## Building
+## Pages
 
-To build the project run:
+### Login Page (`/login`)
+- Email and password authentication
+- Form validation with error messages
+- Remember me functionality
+- Forgot password link
+- Responsive design
 
-```bash
-ng build
-```
+### Home Page (`/home`)
+- Hero section with search functionality
+- Featured events grid
+- Category browsing
+- Navigation header
+- Footer with links and social media
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Technologies Used
 
-## Running unit tests
+- Angular 20
+- TypeScript
+- CSS3 with modern features
+- Angular Reactive Forms
+- Angular Router
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Future Enhancements
 
-```bash
-ng test
-```
+- User registration
+- Event details pages
+- Shopping cart functionality
+- Payment integration
+- User profile management
+- Admin dashboard
+- Real-time notifications
 
-## Running end-to-end tests
+## Contributing
 
-For end-to-end (e2e) testing, run:
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
 
-```bash
-ng e2e
-```
+## License
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+This project is licensed under the MIT License.

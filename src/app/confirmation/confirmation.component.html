@@ -1,0 +1,64 @@
+<div class="confirmation-container">
+  <div class="confirmation-content">
+    <div class="success-icon">
+      <i class="fas fa-check-circle"></i>
+    </div>
+    
+    <h1>Booking Confirmed!</h1>
+    <p class="confirmation-message">
+      Your tickets have been successfully booked. You will receive a confirmation email shortly.
+    </p>
+
+    <div class="booking-summary">
+      <h2>Booking Summary</h2>
+      
+      <div class="summary-card">
+        <div class="event-info">
+          <h3>{{ bookingDetails().title }}</h3>
+          <div class="event-details">
+            <div class="detail-item">
+              <i class="fas fa-calendar"></i>
+              <span>{{ bookingDetails().date }}</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>{{ bookingDetails().venue }}</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-tag"></i>
+              <span>{{ bookingDetails().category }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="seats-info">
+          <h4>Selected Seats</h4>
+          <div class="seats-list">
+            <div class="seat-item" *ngFor="let seat of selectedSeats(); let i = index">
+              <span class="seat-number">{{ seat }}</span>
+              <span class="seat-price">${{ seatPrices()[i] }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="total-info">
+          <div class="total-line">
+            <span>Total Amount</span>
+            <span class="total-price">${{ bookingDetails().total }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button class="download-btn" (click)="downloadTicket()">
+        <i class="fas fa-download"></i>
+        Download Ticket
+      </button>
+      <button class="home-btn" (click)="goToHome()">
+        <i class="fas fa-home"></i>
+        Back to Home
+      </button>
+    </div>
+  </div>
+</div>

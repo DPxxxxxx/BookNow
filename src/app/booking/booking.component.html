@@ -1,0 +1,143 @@
+<div class="booking-container">
+  <!-- Header -->
+  <header class="booking-header">
+    <div class="header-content">
+      <button class="back-btn" (click)="goBack()">
+        <i class="fas fa-arrow-left"></i> Back
+      </button>
+      <h1>Book Tickets</h1>
+    </div>
+  </header>
+
+  <div class="booking-content">
+    <div class="container">
+      <div class="booking-grid">
+        <!-- Event Details -->
+        <div class="event-details-card">
+          <div class="event-image">
+            <img [src]="'https://via.placeholder.com/400x250/ff6b6b/ffffff?text=' + eventDetails().title" [alt]="eventDetails().title">
+            <div class="event-badge">{{ eventDetails().category }}</div>
+          </div>
+          <div class="event-info">
+            <h2>{{ eventDetails().title }}</h2>
+            <div class="event-meta">
+              <div class="meta-item">
+                <i class="fas fa-calendar"></i>
+                <span>{{ eventDetails().date }}</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>{{ eventDetails().venue }}</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-tag"></i>
+                <span>${{ eventDetails().price }} per ticket</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Booking Form -->
+        <div class="booking-form-card">
+          <h3>Booking Details</h3>
+          
+          <!-- Ticket Selection -->
+          <div class="ticket-selection">
+            <h4>Number of Tickets</h4>
+            <div class="ticket-counter">
+              <button class="counter-btn" (click)="onTicketChange(-1)">-</button>
+              <span class="ticket-count">{{ selectedTickets() }}</span>
+              <button class="counter-btn" (click)="onTicketChange(1)">+</button>
+            </div>
+            <div class="ticket-price">
+              <span>Price per ticket: ${{ eventDetails().price }}</span>
+            </div>
+          </div>
+
+          <!-- Personal Information -->
+          <form [formGroup]="bookingForm" class="personal-info">
+            <h4>Personal Information</h4>
+            
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input
+                type="text"
+                id="name"
+                formControlName="name"
+                placeholder="Enter your full name"
+                [class.error]="bookingForm.get('name')?.invalid && bookingForm.get('name')?.touched"
+              />
+              <div *ngIf="bookingForm.get('name')?.invalid && bookingForm.get('name')?.touched" class="error-message">
+                Please enter your full name
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                formControlName="email"
+                placeholder="Enter your email"
+                [class.error]="bookingForm.get('email')?.invalid && bookingForm.get('email')?.touched"
+              />
+              <div *ngIf="bookingForm.get('email')?.invalid && bookingForm.get('email')?.touched" class="error-message">
+                Please enter a valid email address
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input
+                type="tel"
+                id="phone"
+                formControlName="phone"
+                placeholder="Enter your phone number"
+                [class.error]="bookingForm.get('phone')?.invalid && bookingForm.get('phone')?.touched"
+              />
+              <div *ngIf="bookingForm.get('phone')?.invalid && bookingForm.get('phone')?.touched" class="error-message">
+                Please enter a valid 10-digit phone number
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="paymentMethod">Payment Method</label>
+              <select id="paymentMethod" formControlName="paymentMethod">
+                <option value="card">Credit/Debit Card</option>
+                <option value="paypal">PayPal</option>
+                <option value="bank">Bank Transfer</option>
+              </select>
+            </div>
+          </form>
+
+          <!-- Price Summary -->
+          <div class="price-summary">
+            <div class="price-item">
+              <span>Tickets ({{ selectedTickets() }} x ${{ eventDetails().price }})</span>
+              <span>${{ eventDetails().price * selectedTickets() }}</span>
+            </div>
+            <div class="price-item">
+              <span>Service Fee</span>
+              <span>$2.00</span>
+            </div>
+            <div class="price-item total">
+              <span>Total</span>
+              <span>${{ totalPrice() + 2 }}</span>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="action-buttons">
+            <button 
+              class="proceed-btn" 
+              (click)="onProceedToSeats()"
+              [disabled]="bookingForm.invalid"
+            >
+              Select Seats
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
